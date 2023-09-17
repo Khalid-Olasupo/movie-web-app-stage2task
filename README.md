@@ -21,15 +21,16 @@ Before you begin, make sure you have the following installed:
    
 Navigate to the project directory:
 
-bash
+```bash
 Copy code
 cd movie-web-app-stage2task
+
 Install the project dependencies using yarn:
 
 Running the Development Server
 Once you've completed the installation and configuration steps, you can start the development server:
 
-bash
+```bash
 Copy code
 npm run dev
 This will start the Next.js development server. You can access the app in your web browser at http://localhost:3000.
