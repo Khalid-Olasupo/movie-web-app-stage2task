@@ -24,3 +24,13 @@
     color: #999797;
     font-size: 14px;
 }
+
+
+@media screen and (max-width: 700px) {
+    .links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+}

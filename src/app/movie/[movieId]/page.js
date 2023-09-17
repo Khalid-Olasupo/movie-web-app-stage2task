@@ -5,6 +5,7 @@ import React from "react";
 import axios from "axios";
 import styles from "./moviedetails.module.css";
 import Image from "next/image";
+import "remixicon/fonts/remixicon.css";
 import DetailsSidebar from "@/components/detailsidebar/DetailsSidebar";
 
 const getData = async (movieId) => {
@@ -90,6 +91,22 @@ const MovieDetails = async ({ params }) => {
           <div className={styles.overviewContainer}>
             <div className={styles.overview}>
               <p data-testid='movie-overview'>{movieData.overview}</p>
+              <br />
+
+              <div className={styles.topRatedContainer}>
+                <div>
+                  <span>
+                    Top rated movie #65
+                  </span>
+                </div>
+                <div>
+                  <span className={styles.awards}>Awards 9 nominations</span>
+                </div>
+
+                <div className={styles.dropDown}>
+                  <i className='ri-arrow-down-s-line'></i>
+                </div>
+              </div>
             </div>
             <div className={styles.side}>
               <DetailsSidebar />
