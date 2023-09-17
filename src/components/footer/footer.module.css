@@ -1,0 +1,26 @@
+.container {
+    margin-top: 50px;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.socials {
+    display: flex;
+    gap: 30px;
+    font-size: 24px;
+}
+
+.links {
+    display: flex;
+    gap: 30px;
+}
+
+.copyright {
+    color: #999797;
+    font-size: 14px;
+}

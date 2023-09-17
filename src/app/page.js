@@ -1,95 +1,103 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+/** @format */
+"use client";
+
+import Image from "next/image";
+import styles from "./page.module.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Header from "@/components/header/Header";
+import Link from "next/link";
+import MovieCard from "@/components/movieCard/MovieCard";
+import Hero from "@/components/hero/Hero";
+import Footer from "@/components/footer/Footer";
 
 export default function Home() {
+  const [topMovies, setTopMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchResults, setSearchResults] = useState([]);
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const res = await axios.get(
+          "https://api.themoviedb.org/3/movie/top_rated?api_key=0337e8808bdae9331dabf1e81b3f65d0"
+        );
+
+        if (res.data.results) {
+          setTopMovies(res.data.results.slice(0, 10));
+          setIsLoading(false)
+        }
+      } catch (error) {
+        console.error("Error getting movies", error);
+        setError('An error occurred while fetching data. Please check your internet connection or try again later.');
+      }
+    };
+
+    fetchMovies();
+  }, []);
+
+  const handleSearch = (searchQuery) => {
+    const filtered = topMovies.filter((movie) => {
+      if (searchQuery === "") {
+        return null;
+      } else {
+        return movie.title.toLowerCase().includes(searchQuery.toLowerCase());
+      }
+    });
+    setSearchResults(filtered);
+    console.log(searchResults);
+  };
+
+  if (error) {
+    return <div className={styles.error}>{error}</div>
+  }
+  if (isLoading) {
+    return <div className={styles.loading}>Loading...</div>;
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div>
+      <div>
+        <Header onSearch={handleSearch} />
+        <Hero />
+      </div>
+
+      <div className={styles.listContainer}>
+        {searchResults.length === 0 ? (
+          <div></div>
+        ) : (
+          <div>
+            <h1 className={styles.listTitle}>Search results</h1>
+            <div className={styles.moviesList}>
+              {searchResults.map((movie) => {
+                return (
+                  <Link href={`/movie/${movie.id}`} key={movie.id}>
+                    <MovieCard movie={movie} />
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className={styles.listContainer}>
+        <h1 className={styles.listTitle}>Featured Movies</h1>
+        <div className={styles.moviesList}>
+          {topMovies.map((movie) => {
+            return (
+              <Link href={`/movie/${movie.id}`} key={movie.id}>
+                <MovieCard movie={movie} />
+              </Link>
+            );
+          })}
         </div>
       </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div>
+        <Footer/>
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    </div>
+  );
 }

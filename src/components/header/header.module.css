@@ -1,0 +1,99 @@
+/** @format */
+
+.container {
+  display: flex;
+  height: 80px;
+  width: 100%;
+  position: absolute;
+  padding: 0 100px;
+  align-items: center;
+  color: white;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  gap: 10px;
+  align-items: center;
+}
+
+.navContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background: #be123c;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dash {
+    height: 3px;
+    background: white;
+    border-radius: 4px;
+    width: 50%;
+}
+
+.search {
+  width: 500px;
+  display: flex;
+  border: 2px solid white;
+  border-radius: 10px;
+}
+
+.input {
+  width: 100%;
+  padding: 8px 10px;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: white;
+}
+
+.searchButton {
+  width: 40px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 1000px) {
+
+  .logo span {
+   display: none;
+  }
+
+  .navContainer span {
+    display: none;
+  }
+
+  .container {
+    gap: 15px;
+  }
+
+
+}
+
+@media screen and (max-width: 600px) {
+
+  .container {
+  padding: 0 20px;
+}
+}

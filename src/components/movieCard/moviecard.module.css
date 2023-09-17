@@ -1,0 +1,61 @@
+
+.imageContainer {
+    width: 100%;
+    position: relative;
+}
+
+.image {
+    width: 100%;
+}
+
+.favoriteIcon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 1;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.295);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.detailsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.date {
+    color: #919090;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.ratingsContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.imdb, .tomato {
+    display: flex;
+    font-size: 14px;
+    gap: 8px;
+    color: #6e6d6d;
+}
+
+.genres {
+    font-size: 14px;
+    color: #6e6d6d;
+}
